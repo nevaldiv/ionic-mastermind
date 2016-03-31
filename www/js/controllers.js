@@ -1,6 +1,9 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal) {
+  //BINDINGS
+
+
 
   // These icon classes are for mapping the selected guesses to the UI
   $scope.icons = ['ion-social-apple', 'ion-social-android','ion-social-angular','ion-social-html5'];
@@ -37,6 +40,32 @@ angular.module('starter.controllers', [])
 
 
   // Create the winner modal.
+  // CONTRUCTOR FUNCTION:
+  function Selections(input1, input2, input3, input4){
+    this.input1 = input1;
+    this.input2 = input2;
+    this.input3 = input3;
+    this.input4 = input4;
+  }
+
+  // CURRENT SELECTION OBJECT
+  var currentSelection = new Selections("", "", "", "");
+
+  //GENERATE SECRET CODE:
+
+  var combination = {
+    input1: generateAnswer(),
+    input2: generateAnswer(),
+    input3: generateAnswer(),
+    input4: generateAnswer()
+  };
+
+
+  var generateAnswer = function(){
+    return Math.floor(Math.random() * 4);
+  };
+
+  generateAnswer(combination);
   $ionicModal.fromTemplateUrl('templates/winner.html', {
     scope: $scope
   }).then(function(modal) {
